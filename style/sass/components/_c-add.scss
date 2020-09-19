@@ -1,0 +1,96 @@
+.c-add {
+  position: absolute;
+  display: block;
+  content: '';
+  right: 5%;
+  top: 20%;
+  overflow: hidden;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  background-color: #fff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: 0.4s ease-in;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &--anime {
+    animation: anima 500ms ease-in-out forwards;
+
+    & > span {
+      transform: rotate(45deg);
+    }
+  }
+
+  &--content {
+    animation: content 500ms ease-in-out forwards;
+    & .c-add__bill {
+      display: none;
+    }
+    & .c-add__content {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &__content {
+    display: none;
+  }
+
+  &__bill {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-right: 50px;
+    justify-content: space-evenly;
+
+    & span {
+      width: 50px;
+      height: 50px;
+      border-radius: 50px;
+      background-color: #fff;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &__box {
+    position: absolute;
+
+    right: 0;
+    top: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    background-color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s ease-in;
+  }
+}
+
+@keyframes anima {
+  0% {
+    width: 50px;
+  }
+  100% {
+    width: 40%;
+  }
+}
+
+@keyframes content {
+  0% {
+    width: 40%;
+  }
+  100% {
+    width: 40%;
+    height: 50%;
+  }
+}
