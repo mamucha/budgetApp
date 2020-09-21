@@ -1,16 +1,18 @@
 .c-add {
+  z-index: 5;
   position: absolute;
   display: block;
   content: '';
   right: 5%;
   top: 20%;
-  overflow: hidden;
+  // overflow: hidden;
   width: 50px;
   height: 50px;
   border-radius: 50px;
   background-color: #fff;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  transition: 0.4s ease-in;
+  transition: 0.5s ease-in-out;
+  overflow: hidden;
 
   display: flex;
   align-items: center;
@@ -23,21 +25,21 @@
     & > span {
       transform: rotate(45deg);
     }
+
+    & .c-add__bill {
+      opacity: 1;
+    }
   }
 
   &--content {
     animation: content 500ms ease-in-out forwards;
+    overflow: visible;
     & .c-add__bill {
       display: none;
     }
-    & .c-add__content {
-      display: flex;
-      flex-direction: column;
+    & .c-add__box {
+      transform: rotate(45deg);
     }
-  }
-
-  &__content {
-    display: none;
   }
 
   &__bill {
@@ -46,6 +48,7 @@
     align-items: center;
     margin-right: 50px;
     justify-content: space-evenly;
+    opacity: 0;
 
     & span {
       width: 50px;
@@ -73,6 +76,7 @@
     align-items: center;
     justify-content: center;
     transition: 0.3s ease-in;
+    z-index: 3;
   }
 }
 
@@ -88,9 +92,10 @@
 @keyframes content {
   0% {
     width: 40%;
+    height: 50px;
   }
   100% {
     width: 40%;
-    height: 50%;
+    height: 60%;
   }
 }
