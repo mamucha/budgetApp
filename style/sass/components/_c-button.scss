@@ -8,4 +8,11 @@
   background-color: #fff;
   outline: 0;
   cursor: pointer;
+  transition: 0.3s all ease-in-out;
+
+  &__add {
+    &:hover {
+      box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.6);
+    }
+  }
 }

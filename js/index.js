@@ -19,6 +19,7 @@ class BudgetApp {
   addTransfer = null;
   addBill = null;
   addButton = null;
+  addValue = null;
 
   UISelectors = {
     addIncomes: '[data-income]',
@@ -26,6 +27,7 @@ class BudgetApp {
     addTransfer: '[data-transfer]',
     addBill: '[data-id]',
     addButton: '[data-add]',
+    addValue: '[data-create]',
   };
 
   initApp() {
@@ -34,6 +36,7 @@ class BudgetApp {
     this.addTransfer = document.querySelector(this.UISelectors.addTransfer);
     this.addBill = document.querySelectorAll(this.UISelectors.addBill);
     this.addButton = document.querySelector(this.UISelectors.addButton);
+    this.addValue = document.querySelector(this.UISelectors.addValue);
 
     this.menangePanel();
     this.addListeners();
@@ -60,6 +63,8 @@ class BudgetApp {
         this.addItem(item);
       })
     );
+
+    this.addValue.addEventListener('click', (e) => this.createItem(e));
   }
 
   addItem(item) {
@@ -68,6 +73,11 @@ class BudgetApp {
     document.querySelector('.c-content').classList.add('c-content--visible');
     document.querySelector('.c-add').classList.remove('c-add--anime');
     document.querySelector('.c-content__title').innerHTML = `Add ${item.dataset.id}`;
+  }
+
+  createItem(e) {
+    e.preventDefault();
+    console.log('lol');
   }
 }
 

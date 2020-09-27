@@ -39,16 +39,18 @@
           </div>
 
           <div class="c-add__input"></div>
-          <div class="c-content">
+          <form action="" class="c-content">
             <h3 class="c-content__title">add</h3>
             <label for="" class="c-content__name">desc name</label>
-            <input type="text" class="c-content__desctription" />
+            <input type="text" class="c-content__desctription" required />
             <label for="" class="c-content__name">value</label>
-            <input type="text" class="c-content__desctription" />
+            <input type="text" class="c-content__desctription" required />
             <label for="" class="c-content__name">date</label>
-            <input type="date" class="c-content__desctription" />
-            <button class="c-button c-button__add"><i class="fas fa-check"></i></button>
-          </div>
+            <input type="date" class="c-content__desctription" required />
+            <button type="submit" class="c-button c-button__add" data-create>
+              <i class="fas fa-check"></i>
+            </button>
+          </form>
         </section>
         <button class="main__button"><i class="fas fa-check"></i></button>
       </div>
