@@ -11,15 +11,20 @@
 // });
 
 class BudgetApp {
-  constructor() {
-    this.addPanel = false;
-  }
+  // constructor() {
+  //   this.addPanel = false;
+  // }
+  addPanel = false;
   addIncomes = null;
   addExpense = null;
   addTransfer = null;
   addBill = null;
   addButton = null;
   addValue = null;
+  description = null;
+  value = null;
+  date = null;
+  taskList = null;
 
   UISelectors = {
     addIncomes: '[data-income]',
@@ -28,6 +33,10 @@ class BudgetApp {
     addBill: '[data-id]',
     addButton: '[data-add]',
     addValue: '[data-create]',
+    description: 'description',
+    value: 'value',
+    date: 'date',
+    taskList: '[data-tasks]',
   };
 
   initApp() {
@@ -37,13 +46,18 @@ class BudgetApp {
     this.addBill = document.querySelectorAll(this.UISelectors.addBill);
     this.addButton = document.querySelector(this.UISelectors.addButton);
     this.addValue = document.querySelector(this.UISelectors.addValue);
+    this.description = document.getElementById(this.UISelectors.description);
+    this.value = document.getElementById(this.UISelectors.value);
+    this.date = document.getElementById(this.UISelectors.date);
+    this.taskList = document.querySelector(this.UISelectors.taskList);
 
     this.menangePanel();
     this.addListeners();
   }
 
   menangePanel() {
-    this.addButton.addEventListener('click', () => {
+    this.addButton.addEventListener('click', (e) => {
+      console.log(this.addPanel);
       if (!this.addPanel) {
         document.querySelector('.c-add').classList.add('c-add--anime');
         this.addPanel = true;
@@ -64,7 +78,7 @@ class BudgetApp {
       })
     );
 
-    this.addValue.addEventListener('click', (e) => this.createItem(e));
+    this.addValue.addEventListener('submit', (e) => this.createItem(e));
   }
 
   addItem(item) {
@@ -77,7 +91,22 @@ class BudgetApp {
 
   createItem(e) {
     e.preventDefault();
-    console.log('lol');
+    this.addPanel = false;
+    console.log(this.taskList);
+    this.taskList.insertAdjacentHTML(
+      'beforeend',
+      `<li class="c-tasks__item">
+    <p class="c-tasks__desc">${this.description.value}</p>
+    <p class="c-tasks__value">${this.value.value}</p>
+    <p class="c-tasks__date">${this.date.value}</p>
+  </li>`
+    );
+
+    this.description.value = '';
+    this.value.value = '';
+    this.date.value = '';
+    document.querySelector('.c-add').classList.remove('c-add--content');
+    document.querySelector('.c-content').classList.remove('c-content--visible');
   }
 }
 

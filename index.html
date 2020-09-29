@@ -17,8 +17,9 @@
     </header>
     <main class="l-main">
       <div class="l-main__wrapper">
+        <h3 class="l-main__budget">Your total budget <span></span></h3>
         <section class="c-tasks">
-          <li class="c-tasks__box"></li>
+          <ul class="c-tasks__box" data-tasks></ul>
         </section>
         <section class="c-add">
           <span class="c-add__box" data-add><i class="fas fa-plus"></i></span>
@@ -39,20 +40,20 @@
           </div>
 
           <div class="c-add__input"></div>
-          <form action="" class="c-content">
+          <form class="c-content" data-create>
             <h3 class="c-content__title">add</h3>
             <label for="" class="c-content__name">desc name</label>
-            <input type="text" class="c-content__desctription" required />
+            <input type="text" id="description" class="c-content__desctription" required />
             <label for="" class="c-content__name">value</label>
-            <input type="text" class="c-content__desctription" required />
+            <input type="text" id="value" class="c-content__desctription" required />
             <label for="" class="c-content__name">date</label>
-            <input type="date" class="c-content__desctription" required />
-            <button type="submit" class="c-button c-button__add" data-create>
+            <input type="date" id="date" class="c-content__desctription" required />
+            <button type="submit" class="c-button c-button__add">
               <i class="fas fa-check"></i>
             </button>
           </form>
         </section>
-        <button class="main__button"><i class="fas fa-check"></i></button>
+        <!-- <button class="main__button"><i class="fas fa-check"></i></button> -->
       </div>
     </main>
     <link
