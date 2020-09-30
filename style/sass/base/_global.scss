@@ -2,3 +2,15 @@ body {
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
 }
+
+.income {
+  border-left-color: green;
+}
+
+.expense {
+  border-left-color: red;
+}
+
+.transfer {
+  border-left-color: blue;
+}

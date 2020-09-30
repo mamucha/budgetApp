@@ -87,15 +87,16 @@ class BudgetApp {
     document.querySelector('.c-content').classList.add('c-content--visible');
     document.querySelector('.c-add').classList.remove('c-add--anime');
     document.querySelector('.c-content__title').innerHTML = `Add ${item.dataset.id}`;
+    this.addValue.id = `${item.dataset.id.trim().toLowerCase()}`;
   }
 
   createItem(e) {
     e.preventDefault();
     this.addPanel = false;
-    console.log(this.taskList);
+    console.log(this.addValue.id);
     this.taskList.insertAdjacentHTML(
       'beforeend',
-      `<li class="c-tasks__item">
+      `<li class="c-tasks__item ${this.addValue.id}">
     <p class="c-tasks__desc">${this.description.value}</p>
     <p class="c-tasks__value">${this.value.value}</p>
     <p class="c-tasks__date">${this.date.value}</p>

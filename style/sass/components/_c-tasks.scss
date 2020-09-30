@@ -1,0 +1,19 @@
+.c-tasks {
+  margin: 20px;
+
+  &__item {
+    margin-bottom: 15px;
+    display: block;
+    width: 150px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border-left-style: solid;
+    border-left-width: 5px;
+
+    & p {
+      padding-bottom: 5px;
+    }
+  }
+}
