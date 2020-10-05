@@ -1,19 +1,4 @@
-// const btn = document.querySelector('.c-add__box');
-// let addPanel = false;
-
-// btn.addEventListener('click', function () {
-// if(!addPanel) {
-//    document.querySelector('.c-add').classList.add('c-add--anime');
-// }
-
-//   document.querySelector('.c-add').classList.remove('c-add--content');
-//   document.querySelector('.c-content').classList.remove('c-content--visible');
-// });
-
 class BudgetApp {
-  // constructor() {
-  //   this.addPanel = false;
-  // }
   addPanel = false;
   addIncomes = null;
   addExpense = null;
@@ -25,6 +10,9 @@ class BudgetApp {
   value = null;
   date = null;
   taskList = null;
+
+  numberItems = 0;
+  balanceItems = [];
 
   UISelectors = {
     addIncomes: '[data-income]',
@@ -53,11 +41,23 @@ class BudgetApp {
 
     this.menangePanel();
     this.addListeners();
+    this.getLocalStorage();
+
+    this.balanceItems.forEach(({ id, choiceInput, description, value, date }) => {
+      this.taskList.insertAdjacentHTML(
+        'beforeend',
+        `<li class="c-tasks__item ${choiceInput}" id="${id}">
+        <p class="c-tasks__desc">${description}</p>
+        <p class="c-tasks__value">${value}</p>
+        <p class="c-tasks__date">${date}</p>
+      </li>`
+      );
+    });
   }
 
   menangePanel() {
     this.addButton.addEventListener('click', (e) => {
-      console.log(this.addPanel);
+      // console.log(this.addPanel);
       if (!this.addPanel) {
         document.querySelector('.c-add').classList.add('c-add--anime');
         this.addPanel = true;
@@ -93,21 +93,61 @@ class BudgetApp {
   createItem(e) {
     e.preventDefault();
     this.addPanel = false;
-    console.log(this.addValue.id);
+    const newItem = this.getInputsValues();
     this.taskList.insertAdjacentHTML(
       'beforeend',
-      `<li class="c-tasks__item ${this.addValue.id}">
+      `<li class="c-tasks__item ${this.addValue.id}" id="${this.numberItems}">
     <p class="c-tasks__desc">${this.description.value}</p>
     <p class="c-tasks__value">${this.value.value}</p>
     <p class="c-tasks__date">${this.date.value}</p>
   </li>`
     );
 
+    this.balanceItems.push(newItem);
+    console.log(newItem);
+    this.numberItems++;
+
+    this.setLocalStorage();
+
     this.description.value = '';
     this.value.value = '';
     this.date.value = '';
     document.querySelector('.c-add').classList.remove('c-add--content');
     document.querySelector('.c-content').classList.remove('c-content--visible');
+  }
+
+  getInputsValues() {
+    const id = this.numberItems;
+    const choiceInput = this.addValue.id;
+    const description = this.description.value;
+    const value = this.value.value;
+    const date = this.date.value;
+
+    if (value > 0 && description) {
+      return {
+        id,
+        choiceInput,
+        description,
+        value,
+        date,
+      };
+    }
+
+    return null;
+  }
+
+  setLocalStorage() {
+    localStorage.setItem('balanceItems', JSON.stringify(this.balanceItems));
+    localStorage.setItem('numberItems', JSON.stringify(this.numberItems));
+  }
+
+  getLocalStorage() {
+    this.balanceItems = localStorage.getItem('balanceItems')
+      ? JSON.parse(localStorage.getItem('balanceItems'))
+      : [];
+    this.numberItems = localStorage.getItem('numberItems')
+      ? JSON.parse(localStorage.getItem('numberItems'))
+      : 0;
   }
 }
 
