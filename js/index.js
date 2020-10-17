@@ -24,7 +24,9 @@ class BudgetApp {
     description: 'description',
     value: 'value',
     date: 'date',
-    taskList: '[data-tasks]',
+    taskListIncome: '[data-tasks-income]',
+    taskListExpense: '[data-tasks-expense]',
+    taskListTransfer: '[data-tasks-transfer]'
   };
 
   initApp() {
@@ -37,27 +39,73 @@ class BudgetApp {
     this.description = document.getElementById(this.UISelectors.description);
     this.value = document.getElementById(this.UISelectors.value);
     this.date = document.getElementById(this.UISelectors.date);
-    this.taskList = document.querySelector(this.UISelectors.taskList);
+    this.taskListIncome = document.querySelector(this.UISelectors.taskListIncome);
+    this.taskListExpense = document.querySelector(this.UISelectors.taskListExpense);
+    this.taskListTransfer = document.querySelector(this.UISelectors.taskListTransfer);
 
     this.menangePanel();
     this.addListeners();
     this.getLocalStorage();
 
+    const element = this.choiceElement()
+    console.log(element)
+
+
     this.balanceItems.forEach(({ id, choiceInput, description, value, date }) => {
-      this.taskList.insertAdjacentHTML(
+
+     if (choiceInput == this.taskListIncome.id) {
+      this.taskListIncome.insertAdjacentHTML(
         'beforeend',
         `<li class="c-tasks__item ${choiceInput}" id="${id}">
+        <div class="c-tasks__desc">
         <p class="c-tasks__desc">${description}</p>
         <p class="c-tasks__value">${value}</p>
         <p class="c-tasks__date">${date}</p>
+        </div>
+        <div class="c-tasks__edit">
+<button class="c-tasks__button c-tasks__button--edit"></button>
+<button class="c-tasks__button c-tasks__button--delete"></button>
+        </div>
       </li>`
       );
+     } else if(choiceInput == this.taskListExpense.id) {
+      this.taskListExpense.insertAdjacentHTML(
+        'beforeend',
+        `<li class="c-tasks__item ${choiceInput}" id="${id}">
+        <div class="c-tasks__desc">
+        <p class="c-tasks__desc">${description}</p>
+        <p class="c-tasks__value">${value}</p>
+        <p class="c-tasks__date">${date}</p>
+        </div>
+        <div class="c-tasks__edit">
+<button class="c-tasks__button c-tasks__button--edit"></button>
+<button class="c-tasks__button c-tasks__button--delete"></button>
+        </div>
+      </li>`
+      );
+     } else if(choiceInput == this.taskListTransfer.id) {
+      this.taskListTransfer.insertAdjacentHTML(
+        'beforeend',
+        `<li class="c-tasks__item ${choiceInput}" id="${id}">
+        <div class="c-tasks__desc">
+        <p class="c-tasks__desc">${description}</p>
+        <p class="c-tasks__value">${value}</p>
+        <p class="c-tasks__date">${date}</p>
+        </div>
+        <div class="c-tasks__edit">
+<button class="c-tasks__button c-tasks__button--edit"></button>
+<button class="c-tasks__button c-tasks__button--delete"></button>
+        </div>
+      </li>`
+      );
+     }
+
+
     });
   }
 
   menangePanel() {
     this.addButton.addEventListener('click', (e) => {
-      // console.log(this.addPanel);
       if (!this.addPanel) {
         document.querySelector('.c-add').classList.add('c-add--anime');
         this.addPanel = true;
@@ -94,13 +142,18 @@ class BudgetApp {
     e.preventDefault();
     this.addPanel = false;
     const newItem = this.getInputsValues();
-    this.taskList.insertAdjacentHTML(
+
+    console.log(this.taskListTransfer.id)
+    console.log(this.addValue.id)
+
+  const element = this.choiceElement();
+
+  
+
+
+  element.insertAdjacentHTML(
       'beforeend',
-      `<li class="c-tasks__item ${this.addValue.id}" id="${this.numberItems}">
-    <p class="c-tasks__desc">${this.description.value}</p>
-    <p class="c-tasks__value">${this.value.value}</p>
-    <p class="c-tasks__date">${this.date.value}</p>
-  </li>`
+this.createLiBox()
     );
 
     this.balanceItems.push(newItem);
@@ -114,6 +167,37 @@ class BudgetApp {
     this.date.value = '';
     document.querySelector('.c-add').classList.remove('c-add--content');
     document.querySelector('.c-content').classList.remove('c-content--visible');
+  }
+
+  choiceElement() {
+
+if(this.addValue.id == this.taskListIncome.id){
+  console.log(this.addValue.id)
+  return this.taskListIncome
+}
+else if(this.addValue.id == this.taskListExpense.id) {
+  return this.taskListExpense
+} 
+else if(this.addValue.id == this.taskListTransfer.id) {
+  return this.taskListTransfer
+}
+
+  }
+
+
+  createLiBox() {
+    return `
+    <li class="c-tasks__item ${this.addValue.id}" id="${this.numberItems}">
+    <div class="c-tasks__desc">
+    <p class="c-tasks__desc">${this.description.value}</p>
+    <p class="c-tasks__value">${this.value.value}</p>
+    <p class="c-tasks__date">${this.date.value}</p>
+    </div>
+    <div class="c-tasks__edit">
+<button class="c-tasks__button c-tasks__button--edit"></button>
+<button class="c-tasks__button c-tasks__button--delete"></button>
+    </div>
+  </li>`;
   }
 
   getInputsValues() {
