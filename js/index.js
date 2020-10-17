@@ -24,9 +24,11 @@ class BudgetApp {
     description: 'description',
     value: 'value',
     date: 'date',
+    balanceList: '[data-balance-list]',
     taskListIncome: '[data-tasks-income]',
     taskListExpense: '[data-tasks-expense]',
-    taskListTransfer: '[data-tasks-transfer]'
+    taskListTransfer: '[data-tasks-transfer]',
+    deleteTask: '[data-delete]'
   };
 
   initApp() {
@@ -39,9 +41,11 @@ class BudgetApp {
     this.description = document.getElementById(this.UISelectors.description);
     this.value = document.getElementById(this.UISelectors.value);
     this.date = document.getElementById(this.UISelectors.date);
+    this.balanceList = document.querySelector(this.UISelectors.balanceList);
     this.taskListIncome = document.querySelector(this.UISelectors.taskListIncome);
     this.taskListExpense = document.querySelector(this.UISelectors.taskListExpense);
     this.taskListTransfer = document.querySelector(this.UISelectors.taskListTransfer);
+
 
     this.menangePanel();
     this.addListeners();
@@ -63,8 +67,8 @@ class BudgetApp {
         <p class="c-tasks__date">${date}</p>
         </div>
         <div class="c-tasks__edit">
-<button class="c-tasks__button c-tasks__button--edit"></button>
-<button class="c-tasks__button c-tasks__button--delete"></button>
+<button class="c-tasks__button c-tasks__button--edit"><i class="fas fa-edit"></i></button>
+<button class="c-tasks__button c-tasks__button--delete" data-delete="delete"><i class="fas fa-times"></i></button>
         </div>
       </li>`
       );
@@ -78,8 +82,8 @@ class BudgetApp {
         <p class="c-tasks__date">${date}</p>
         </div>
         <div class="c-tasks__edit">
-<button class="c-tasks__button c-tasks__button--edit"></button>
-<button class="c-tasks__button c-tasks__button--delete"></button>
+<button class="c-tasks__button c-tasks__button--edit"><i class="fas fa-edit"></i></button>
+<button class="c-tasks__button c-tasks__button--delete" data-delete="delete"><i class="fas fa-times"></i></button>
         </div>
       </li>`
       );
@@ -93,8 +97,8 @@ class BudgetApp {
         <p class="c-tasks__date">${date}</p>
         </div>
         <div class="c-tasks__edit">
-<button class="c-tasks__button c-tasks__button--edit"></button>
-<button class="c-tasks__button c-tasks__button--delete"></button>
+<button class="c-tasks__button c-tasks__button--edit" data-btn-edit><i class="fas fa-edit"></i></button>
+<button class="c-tasks__button c-tasks__button--delete" data-delete="delete"><i class="fas fa-times"></i></button>
         </div>
       </li>`
       );
@@ -125,6 +129,11 @@ class BudgetApp {
         this.addItem(item);
       })
     );
+
+this.balanceList.addEventListener('click', (e) => {
+  this.clickHandler(e.target.parentElement)
+
+})
 
     this.addValue.addEventListener('submit', (e) => this.createItem(e));
   }
@@ -194,8 +203,8 @@ else if(this.addValue.id == this.taskListTransfer.id) {
     <p class="c-tasks__date">${this.date.value}</p>
     </div>
     <div class="c-tasks__edit">
-<button class="c-tasks__button c-tasks__button--edit"></button>
-<button class="c-tasks__button c-tasks__button--delete"></button>
+<button class="c-tasks__button c-tasks__button--edit" data-btn-edit><i class="fas fa-edit"></i></button>
+<button class="c-tasks__button c-tasks__button--delete" data-delete="delete"><i class="fas fa-times"></i></button>
     </div>
   </li>`;
   }
@@ -219,6 +228,28 @@ else if(this.addValue.id == this.taskListTransfer.id) {
 
     return null;
   }
+
+  clickHandler(target) {
+    console.log(document.querySelector(this.UISelectors.deleteTask).dataset.delete)
+    console.log(target.dataset == document.querySelector(this.UISelectors.deleteTask))
+    console.log(target.dataset.delete)
+    // console.log(target.getAttribute())
+if(target.dataset.delete === document.querySelector(this.UISelectors.deleteTask).dataset.delete)
+
+target.parentElement.parentElement.remove()
+this.removeLocalStorage(target.parentElement.parentElement.id);
+
+
+console.log(target.parentElement.parentElement)
+  }
+
+ removeLocalStorage(id) {
+    let items = [...this.balanceItems]
+    this.balanceItems = items.filter((item) => item.id != id);
+
+    this.setLocalStorage()
+
+  };
 
   setLocalStorage() {
     localStorage.setItem('balanceItems', JSON.stringify(this.balanceItems));
