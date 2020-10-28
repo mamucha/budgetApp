@@ -1,5 +1,5 @@
 .c-tasks {
-  margin: 20px;
+  margin: 40px 20px 20px 20px;
 
   &__box {
     display: flex;
@@ -26,6 +26,17 @@
     &:hover .c-tasks__edit {
       transform: translateX(0px);
       opacity: 1;
+    }
+  }
+
+  &__icon {
+    padding-right: 5px;
+    text-align: center;
+
+    & i {
+      width: 20px;
+      height: 15px;
+      object-fit: cover;
     }
   }
 

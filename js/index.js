@@ -62,9 +62,9 @@ class BudgetApp {
         'beforeend',
         `<li class="c-tasks__item ${choiceInput}" id="${id}">
         <div class="c-tasks__desc">
-        <p class="c-tasks__desc">${description}</p>
-        <p class="c-tasks__value">${value}</p>
-        <p class="c-tasks__date">${date}</p>
+        <p class="c-tasks__desc"><span class="c-tasks__icon"><i class="fas fa-file-alt"></i></span>${description}</p>
+        <p class="c-tasks__value"><span class="c-tasks__icon"><i class="fas fa-dollar-sign"></i></span>${value}</p>
+        <p class="c-tasks__date"><span class="c-tasks__icon"><i class="fas fa-calendar-day"></i></span>${date}</p>
         </div>
         <div class="c-tasks__edit">
 <button class="c-tasks__button c-tasks__button--edit"><i class="fas fa-edit"></i></button>
@@ -77,9 +77,9 @@ class BudgetApp {
         'beforeend',
         `<li class="c-tasks__item ${choiceInput}" id="${id}">
         <div class="c-tasks__desc">
-        <p class="c-tasks__desc">${description}</p>
-        <p class="c-tasks__value">${value}</p>
-        <p class="c-tasks__date">${date}</p>
+        <p class="c-tasks__desc"><span class="c-tasks__icon"><i class="fas fa-file-alt"></i></span>${description}</p>
+        <p class="c-tasks__value"><span class="c-tasks__icon"><i class="fas fa-dollar-sign"></i></span>${value}</p>
+        <p class="c-tasks__date"><span class="c-tasks__icon"><i class="fas fa-calendar-day"></i></span>${date}</p>
         </div>
         <div class="c-tasks__edit">
 <button class="c-tasks__button c-tasks__button--edit"><i class="fas fa-edit"></i></button>
@@ -92,9 +92,9 @@ class BudgetApp {
         'beforeend',
         `<li class="c-tasks__item ${choiceInput}" id="${id}">
         <div class="c-tasks__desc">
-        <p class="c-tasks__desc">${description}</p>
-        <p class="c-tasks__value">${value}</p>
-        <p class="c-tasks__date">${date}</p>
+        <p class="c-tasks__desc"><span class="c-tasks__icon"><i class="fas fa-file-alt"></i></span>${description}</p>
+        <p class="c-tasks__value"><span class="c-tasks__icon"><i class="fas fa-dollar-sign"></i></span>${value}</p>
+        <p class="c-tasks__date"><span class="c-tasks__icon"><i class="fas fa-calendar-day"></i></span>${date}</p>
         </div>
         <div class="c-tasks__edit">
 <button class="c-tasks__button c-tasks__button--edit" data-btn-edit><i class="fas fa-edit"></i></button>
@@ -198,9 +198,9 @@ else if(this.addValue.id == this.taskListTransfer.id) {
     return `
     <li class="c-tasks__item ${this.addValue.id}" id="${this.numberItems}">
     <div class="c-tasks__desc">
-    <p class="c-tasks__desc">${this.description.value}</p>
-    <p class="c-tasks__value">${this.value.value}</p>
-    <p class="c-tasks__date">${this.date.value}</p>
+    <p class="c-tasks__desc"><span class="c-tasks__icon"><i class="fas fa-file-alt"></i></span>${this.description.value}</p>
+    <p class="c-tasks__value"><span class="c-tasks__icon"><i class="fas fa-dollar-sign"></i></span>${this.value.value}</p>
+    <p class="c-tasks__date"><span class="c-tasks__icon"><i class="fas fa-calendar-day"></i></span>${this.date.value}</p>
     </div>
     <div class="c-tasks__edit">
 <button class="c-tasks__button c-tasks__button--edit" data-btn-edit><i class="fas fa-edit"></i></button>
@@ -233,7 +233,6 @@ else if(this.addValue.id == this.taskListTransfer.id) {
     console.log(document.querySelector(this.UISelectors.deleteTask).dataset.delete)
     console.log(target.dataset == document.querySelector(this.UISelectors.deleteTask))
     console.log(target.dataset.delete)
-    // console.log(target.getAttribute())
 if(target.dataset.delete === document.querySelector(this.UISelectors.deleteTask).dataset.delete)
 
 target.parentElement.parentElement.remove()
