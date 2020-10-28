@@ -12,6 +12,7 @@ class BudgetApp {
   taskList = null;
 
   numberItems = 0;
+  totalBudget = 0;
   balanceItems = [];
 
   UISelectors = {
@@ -24,11 +25,12 @@ class BudgetApp {
     description: 'description',
     value: 'value',
     date: 'date',
+    money: '[data-money]',
     balanceList: '[data-balance-list]',
     taskListIncome: '[data-tasks-income]',
     taskListExpense: '[data-tasks-expense]',
     taskListTransfer: '[data-tasks-transfer]',
-    deleteTask: '[data-delete]'
+    deleteTask: '[data-delete]',
   };
 
   initApp() {
@@ -41,6 +43,7 @@ class BudgetApp {
     this.description = document.getElementById(this.UISelectors.description);
     this.value = document.getElementById(this.UISelectors.value);
     this.date = document.getElementById(this.UISelectors.date);
+    this.money = document.querySelector(this.UISelectors.money)
     this.balanceList = document.querySelector(this.UISelectors.balanceList);
     this.taskListIncome = document.querySelector(this.UISelectors.taskListIncome);
     this.taskListExpense = document.querySelector(this.UISelectors.taskListExpense);
@@ -67,7 +70,6 @@ class BudgetApp {
         <p class="c-tasks__date"><span class="c-tasks__icon"><i class="fas fa-calendar-day"></i></span>${date}</p>
         </div>
         <div class="c-tasks__edit">
-<button class="c-tasks__button c-tasks__button--edit"><i class="fas fa-edit"></i></button>
 <button class="c-tasks__button c-tasks__button--delete" data-delete="delete"><i class="fas fa-times"></i></button>
         </div>
       </li>`
@@ -82,7 +84,6 @@ class BudgetApp {
         <p class="c-tasks__date"><span class="c-tasks__icon"><i class="fas fa-calendar-day"></i></span>${date}</p>
         </div>
         <div class="c-tasks__edit">
-<button class="c-tasks__button c-tasks__button--edit"><i class="fas fa-edit"></i></button>
 <button class="c-tasks__button c-tasks__button--delete" data-delete="delete"><i class="fas fa-times"></i></button>
         </div>
       </li>`
@@ -97,7 +98,6 @@ class BudgetApp {
         <p class="c-tasks__date"><span class="c-tasks__icon"><i class="fas fa-calendar-day"></i></span>${date}</p>
         </div>
         <div class="c-tasks__edit">
-<button class="c-tasks__button c-tasks__button--edit" data-btn-edit><i class="fas fa-edit"></i></button>
 <button class="c-tasks__button c-tasks__button--delete" data-delete="delete"><i class="fas fa-times"></i></button>
         </div>
       </li>`
@@ -105,7 +105,9 @@ class BudgetApp {
      }
 
 
+
     });
+    this.updateBudget()
   }
 
   menangePanel() {
@@ -131,7 +133,7 @@ class BudgetApp {
     );
 
 this.balanceList.addEventListener('click', (e) => {
-  this.clickHandler(e.target.parentElement)
+  this.deleteItem(e.target.parentElement)
 
 })
 
@@ -157,18 +159,18 @@ this.balanceList.addEventListener('click', (e) => {
 
   const element = this.choiceElement();
 
-  
-
-
   element.insertAdjacentHTML(
       'beforeend',
 this.createLiBox()
     );
 
+   
+
     this.balanceItems.push(newItem);
     console.log(newItem);
     this.numberItems++;
 
+    this.updateBudget();
     this.setLocalStorage();
 
     this.description.value = '';
@@ -203,10 +205,24 @@ else if(this.addValue.id == this.taskListTransfer.id) {
     <p class="c-tasks__date"><span class="c-tasks__icon"><i class="fas fa-calendar-day"></i></span>${this.date.value}</p>
     </div>
     <div class="c-tasks__edit">
-<button class="c-tasks__button c-tasks__button--edit" data-btn-edit><i class="fas fa-edit"></i></button>
 <button class="c-tasks__button c-tasks__button--delete" data-delete="delete"><i class="fas fa-times"></i></button>
     </div>
   </li>`;
+  }
+
+
+  updateBudget() {
+    console.log(this.money)
+    console.log(this.money.value)
+    console.log(this.balanceItems)
+this.totalBudget = 0
+    this.balanceItems.forEach(({choiceInput,value}) => {
+      choiceInput=="income" ? (this.totalBudget += parseFloat(value)): (this.totalBudget -= parseFloat(value))
+    })
+
+    this.money.innerHTML = this.totalBudget
+    console.log(this.totalBudget)
+
   }
 
   getInputsValues() {
@@ -229,18 +245,16 @@ else if(this.addValue.id == this.taskListTransfer.id) {
     return null;
   }
 
-  clickHandler(target) {
-    console.log(document.querySelector(this.UISelectors.deleteTask).dataset.delete)
-    console.log(target.dataset == document.querySelector(this.UISelectors.deleteTask))
-    console.log(target.dataset.delete)
+  deleteItem(target) {
+
 if(target.dataset.delete === document.querySelector(this.UISelectors.deleteTask).dataset.delete)
 
 target.parentElement.parentElement.remove()
 this.removeLocalStorage(target.parentElement.parentElement.id);
+this.updateBudget()
 
-
-console.log(target.parentElement.parentElement)
   }
+
 
  removeLocalStorage(id) {
     let items = [...this.balanceItems]
