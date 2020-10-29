@@ -1,11 +1,14 @@
 .l-main {
-  height: 100vh;
-  width: 100vw;
+  @include size(100vw, 100vh);
   padding: 100px 10px 10px 10px;
   background: #fff url('./../../media/background.png') center center repeat;
   overflow: overlay;
 
   &__budget {
     margin-top: 20px;
+
+    & span {
+      font-size: 24px;
+    }
   }
 }
