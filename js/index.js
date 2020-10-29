@@ -59,44 +59,17 @@ class BudgetApp {
      if (choiceInput == this.taskListIncome.id) {
       this.taskListIncome.insertAdjacentHTML(
         'beforeend',
-        `<li class="c-tasks__item ${choiceInput}" id="${id}">
-        <div class="c-tasks__desc">
-        <p class="c-tasks__desc"><span class="c-tasks__icon"><i class="fas fa-file-alt"></i></span>${description}</p>
-        <p class="c-tasks__value"><span class="c-tasks__icon"><i class="fas fa-dollar-sign"></i></span>${value}</p>
-        <p class="c-tasks__date"><span class="c-tasks__icon"><i class="fas fa-calendar-day"></i></span>${date}</p>
-        </div>
-        <div class="c-tasks__edit">
-<button class="c-tasks__button c-tasks__button--delete" data-delete="delete"><i class="fas fa-times"></i></button>
-        </div>
-      </li>`
+        this.createLiBox(id, choiceInput, description, value, date)
       );
      } else if(choiceInput == this.taskListExpense.id) {
       this.taskListExpense.insertAdjacentHTML(
         'beforeend',
-        `<li class="c-tasks__item ${choiceInput}" id="${id}">
-        <div class="c-tasks__desc">
-        <p class="c-tasks__desc"><span class="c-tasks__icon"><i class="fas fa-file-alt"></i></span>${description}</p>
-        <p class="c-tasks__value"><span class="c-tasks__icon"><i class="fas fa-dollar-sign"></i></span>${value}</p>
-        <p class="c-tasks__date"><span class="c-tasks__icon"><i class="fas fa-calendar-day"></i></span>${date}</p>
-        </div>
-        <div class="c-tasks__edit">
-<button class="c-tasks__button c-tasks__button--delete" data-delete="delete"><i class="fas fa-times"></i></button>
-        </div>
-      </li>`
+        this.createLiBox(id, choiceInput, description, value, date)
       );
      } else if(choiceInput == this.taskListTransfer.id) {
       this.taskListTransfer.insertAdjacentHTML(
         'beforeend',
-        `<li class="c-tasks__item ${choiceInput}" id="${id}">
-        <div class="c-tasks__desc">
-        <p class="c-tasks__desc"><span class="c-tasks__icon"><i class="fas fa-file-alt"></i></span>${description}</p>
-        <p class="c-tasks__value"><span class="c-tasks__icon"><i class="fas fa-dollar-sign"></i></span>${value}</p>
-        <p class="c-tasks__date"><span class="c-tasks__icon"><i class="fas fa-calendar-day"></i></span>${date}</p>
-        </div>
-        <div class="c-tasks__edit">
-<button class="c-tasks__button c-tasks__button--delete" data-delete="delete"><i class="fas fa-times"></i></button>
-        </div>
-      </li>`
+        this.createLiBox(id, choiceInput, description, value, date)
       );
      }
     });
@@ -152,7 +125,13 @@ this.balanceList.addEventListener('click', (e) => {
   const element = this.choiceElement();
   element.insertAdjacentHTML(
       'beforeend',
-this.createLiBox()
+this.createLiBox(
+  newItem.choiceInput,
+  newItem.id,
+  newItem.description,
+  newItem.value,
+  newItem.date
+)
     );
 
     this.balanceItems.push(newItem);
@@ -180,13 +159,13 @@ else if(this.addValue.id == this.taskListTransfer.id) {
 }
   }
 
-  createLiBox() {
+  createLiBox(id, choiceInput, description, value, date) {
     return `
-    <li class="c-tasks__item ${this.addValue.id}" id="${this.numberItems}">
+    <li class="c-tasks__item ${choiceInput}" id="${id}">
     <div class="c-tasks__desc">
-    <p class="c-tasks__desc"><span class="c-tasks__icon"><i class="fas fa-file-alt"></i></span>${this.description.value}</p>
-    <p class="c-tasks__value"><span class="c-tasks__icon"><i class="fas fa-dollar-sign"></i></span>${this.value.value}</p>
-    <p class="c-tasks__date"><span class="c-tasks__icon"><i class="fas fa-calendar-day"></i></span>${this.date.value}</p>
+    <p class="c-tasks__desc"><span class="c-tasks__icon"><i class="fas fa-file-alt"></i></span>${description}</p>
+    <p class="c-tasks__value"><span class="c-tasks__icon"><i class="fas fa-dollar-sign"></i></span>${value}</p>
+    <p class="c-tasks__date"><span class="c-tasks__icon"><i class="fas fa-calendar-day"></i></span>${date}</p>
     </div>
     <div class="c-tasks__edit">
 <button class="c-tasks__button c-tasks__button--delete" data-delete="delete"><i class="fas fa-times"></i></button>
