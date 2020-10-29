@@ -1,5 +1,6 @@
 .l-header {
   @include flex(flex, center, space-between);
+  z-index: 2;
   position: fixed;
   top: 0;
   left: 0;
@@ -7,4 +8,12 @@
   background-color: #fff;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   padding: 20px;
+}
+
+@media only screen and (max-width: 640px) {
+  .l-header {
+    & img:nth-child(1) {
+      width: 60%;
+    }
+  }
 }

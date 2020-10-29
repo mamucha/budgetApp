@@ -49,13 +49,9 @@ class BudgetApp {
     this.taskListExpense = document.querySelector(this.UISelectors.taskListExpense);
     this.taskListTransfer = document.querySelector(this.UISelectors.taskListTransfer);
 
-
     this.menangePanel();
     this.addListeners();
     this.getLocalStorage();
-
-    const element = this.choiceElement()
-    console.log(element)
 
 
     this.balanceItems.forEach(({ id, choiceInput, description, value, date }) => {
@@ -103,9 +99,6 @@ class BudgetApp {
       </li>`
       );
      }
-
-
-
     });
     this.updateBudget()
   }
@@ -113,10 +106,12 @@ class BudgetApp {
   menangePanel() {
     this.addButton.addEventListener('click', (e) => {
       if (!this.addPanel) {
+        document.querySelector('.c-add').classList.remove('c-add--close');
         document.querySelector('.c-add').classList.add('c-add--anime');
         this.addPanel = true;
       } else {
         document.querySelector('.c-add').classList.remove('c-add--anime');
+        document.querySelector('.c-add').classList.add('c-add--close');
         this.addPanel = false;
       }
 
@@ -154,20 +149,13 @@ this.balanceList.addEventListener('click', (e) => {
     this.addPanel = false;
     const newItem = this.getInputsValues();
 
-    console.log(this.taskListTransfer.id)
-    console.log(this.addValue.id)
-
   const element = this.choiceElement();
-
   element.insertAdjacentHTML(
       'beforeend',
 this.createLiBox()
     );
 
-   
-
     this.balanceItems.push(newItem);
-    console.log(newItem);
     this.numberItems++;
 
     this.updateBudget();
@@ -181,9 +169,7 @@ this.createLiBox()
   }
 
   choiceElement() {
-
 if(this.addValue.id == this.taskListIncome.id){
-  console.log(this.addValue.id)
   return this.taskListIncome
 }
 else if(this.addValue.id == this.taskListExpense.id) {
@@ -192,9 +178,7 @@ else if(this.addValue.id == this.taskListExpense.id) {
 else if(this.addValue.id == this.taskListTransfer.id) {
   return this.taskListTransfer
 }
-
   }
-
 
   createLiBox() {
     return `
@@ -210,19 +194,13 @@ else if(this.addValue.id == this.taskListTransfer.id) {
   </li>`;
   }
 
-
   updateBudget() {
-    console.log(this.money)
-    console.log(this.money.value)
-    console.log(this.balanceItems)
+
 this.totalBudget = 0
     this.balanceItems.forEach(({choiceInput,value}) => {
       choiceInput=="income" ? (this.totalBudget += parseFloat(value)): (this.totalBudget -= parseFloat(value))
     })
-
     this.money.innerHTML = this.totalBudget
-    console.log(this.totalBudget)
-
   }
 
   getInputsValues() {
@@ -246,22 +224,17 @@ this.totalBudget = 0
   }
 
   deleteItem(target) {
-
 if(target.dataset.delete === document.querySelector(this.UISelectors.deleteTask).dataset.delete)
-
 target.parentElement.parentElement.remove()
 this.removeLocalStorage(target.parentElement.parentElement.id);
 this.updateBudget()
 
   }
 
-
  removeLocalStorage(id) {
     let items = [...this.balanceItems]
     this.balanceItems = items.filter((item) => item.id != id);
-
     this.setLocalStorage()
-
   };
 
   setLocalStorage() {
