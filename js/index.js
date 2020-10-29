@@ -126,8 +126,8 @@ this.balanceList.addEventListener('click', (e) => {
   element.insertAdjacentHTML(
       'beforeend',
 this.createLiBox(
-  newItem.choiceInput,
   newItem.id,
+  newItem.choiceInput,
   newItem.description,
   newItem.value,
   newItem.date
@@ -189,10 +189,10 @@ this.totalBudget = 0
     const value = this.value.value;
     const date = this.date.value;
 
-    if (value > 0 && description) {
+    if (value > 0 && description && date) {
       return {
-        id,
         choiceInput,
+        id,
         description,
         value,
         date,
