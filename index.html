@@ -16,45 +16,44 @@
       <img src="media/logo.svg" alt="" />
     </header>
     <main class="l-main">
-        <h3 class="l-main__budget">Your total budget: <span data-money></span></h3>
-        <section class="c-tasks" data-balance-list>
-          <ul id="income" class="c-tasks__box" data-tasks-income></ul>
-          <ul id="expense" class="c-tasks__box" data-tasks-expense></ul>
-          <ul id="transfer" class="c-tasks__box" data-tasks-transfer></ul>
-        </section>
-        <section class="c-add">
-          <span class="c-add__box" data-add><i class="fas fa-plus"></i></span>
-          <div class="c-add__bill">
-            <span class="c-add__box--bill" data-income data-id="Income"
-              ><i class="fas fa-plus"></i
-            ></span>
-            <span class="c-add__box--bill" data-expense data-id="Expense"
-              ><i class="fas fa-minus"></i
-            ></span>
-            <span
-              class="c-add__box--bill"
-              data-transfer
-              data-id="
+      <h3 class="l-main__budget">Your total budget: <span data-money></span></h3>
+      <section class="c-tasks" data-balance-list>
+        <ul id="income" class="c-tasks__box" data-tasks-income></ul>
+        <ul id="expense" class="c-tasks__box" data-tasks-expense></ul>
+        <ul id="transfer" class="c-tasks__box" data-tasks-transfer></ul>
+      </section>
+      <section class="c-add">
+        <span class="c-add__box" data-add><i class="fas fa-plus"></i></span>
+        <div class="c-add__bill">
+          <span class="c-add__box--bill" data-income data-id="Income"
+            ><i class="fas fa-plus"></i
+          ></span>
+          <span class="c-add__box--bill" data-expense data-id="Expense"
+            ><i class="fas fa-minus"></i
+          ></span>
+          <span
+            class="c-add__box--bill"
+            data-transfer
+            data-id="
             Transfer"
-              ><i class="fas fa-sync-alt"></i
-            ></span>
-          </div>
+            ><i class="fas fa-sync-alt"></i
+          ></span>
+        </div>
 
-          <div class="c-add__input"></div>
-          <form class="c-content" data-create>
-            <h3 class="c-content__title">add</h3>
-            <label for="" class="c-content__name">desc name</label>
-            <input type="text" id="description" class="c-content__desctription" required />
-            <label for="" class="c-content__name">value</label>
-            <input type="text" id="value" class="c-content__desctription" required />
-            <label for="" class="c-content__name">date</label>
-            <input type="date" id="date" class="c-content__desctription" required />
-            <button type="submit" class="c-button c-button__add">
-              <i class="fas fa-check"></i>
-            </button>
-          </form>
-        </section>
- 
+        <div class="c-add__input"></div>
+        <form class="c-content" data-create>
+          <h3 class="c-content__title">add</h3>
+          <label for="" class="c-content__name">desc name</label>
+          <input type="text" id="description" class="c-content__desctription" required />
+          <label for="" class="c-content__name">value</label>
+          <input type="text" id="value" class="c-content__desctription" required />
+          <label for="" class="c-content__name">date</label>
+          <input type="date" id="date" class="c-content__desctription" required />
+          <button type="submit" class="c-button c-button__add">
+            <i class="fas fa-check"></i>
+          </button>
+        </form>
+      </section>
     </main>
     <link
       rel="stylesheet"

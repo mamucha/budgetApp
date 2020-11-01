@@ -43,7 +43,7 @@ class BudgetApp {
     this.description = document.getElementById(this.UISelectors.description);
     this.value = document.getElementById(this.UISelectors.value);
     this.date = document.getElementById(this.UISelectors.date);
-    this.money = document.querySelector(this.UISelectors.money)
+    this.money = document.querySelector(this.UISelectors.money);
     this.balanceList = document.querySelector(this.UISelectors.balanceList);
     this.taskListIncome = document.querySelector(this.UISelectors.taskListIncome);
     this.taskListExpense = document.querySelector(this.UISelectors.taskListExpense);
@@ -53,27 +53,25 @@ class BudgetApp {
     this.addListeners();
     this.getLocalStorage();
 
-
     this.balanceItems.forEach(({ id, choiceInput, description, value, date }) => {
-
-     if (choiceInput == this.taskListIncome.id) {
-      this.taskListIncome.insertAdjacentHTML(
-        'beforeend',
-        this.createLiBox(id, choiceInput, description, value, date)
-      );
-     } else if(choiceInput == this.taskListExpense.id) {
-      this.taskListExpense.insertAdjacentHTML(
-        'beforeend',
-        this.createLiBox(id, choiceInput, description, value, date)
-      );
-     } else if(choiceInput == this.taskListTransfer.id) {
-      this.taskListTransfer.insertAdjacentHTML(
-        'beforeend',
-        this.createLiBox(id, choiceInput, description, value, date)
-      );
-     }
+      if (choiceInput == this.taskListIncome.id) {
+        this.taskListIncome.insertAdjacentHTML(
+          'beforeend',
+          this.createLiBox(id, choiceInput, description, value, date)
+        );
+      } else if (choiceInput == this.taskListExpense.id) {
+        this.taskListExpense.insertAdjacentHTML(
+          'beforeend',
+          this.createLiBox(id, choiceInput, description, value, date)
+        );
+      } else if (choiceInput == this.taskListTransfer.id) {
+        this.taskListTransfer.insertAdjacentHTML(
+          'beforeend',
+          this.createLiBox(id, choiceInput, description, value, date)
+        );
+      }
     });
-    this.updateBudget()
+    this.updateBudget();
   }
 
   menangePanel() {
@@ -100,10 +98,9 @@ class BudgetApp {
       })
     );
 
-this.balanceList.addEventListener('click', (e) => {
-  this.deleteItem(e.target.parentElement)
-
-})
+    this.balanceList.addEventListener('click', (e) => {
+      this.deleteItem(e.target.parentElement);
+    });
 
     this.addValue.addEventListener('submit', (e) => this.createItem(e));
   }
@@ -122,16 +119,16 @@ this.balanceList.addEventListener('click', (e) => {
     this.addPanel = false;
     const newItem = this.getInputsValues();
 
-  const element = this.choiceElement();
-  element.insertAdjacentHTML(
+    const element = this.choiceElement();
+    element.insertAdjacentHTML(
       'beforeend',
-this.createLiBox(
-  newItem.id,
-  newItem.choiceInput,
-  newItem.description,
-  newItem.value,
-  newItem.date
-)
+      this.createLiBox(
+        newItem.id,
+        newItem.choiceInput,
+        newItem.description,
+        newItem.value,
+        newItem.date
+      )
     );
 
     this.balanceItems.push(newItem);
@@ -148,15 +145,13 @@ this.createLiBox(
   }
 
   choiceElement() {
-if(this.addValue.id == this.taskListIncome.id){
-  return this.taskListIncome
-}
-else if(this.addValue.id == this.taskListExpense.id) {
-  return this.taskListExpense
-} 
-else if(this.addValue.id == this.taskListTransfer.id) {
-  return this.taskListTransfer
-}
+    if (this.addValue.id == this.taskListIncome.id) {
+      return this.taskListIncome;
+    } else if (this.addValue.id == this.taskListExpense.id) {
+      return this.taskListExpense;
+    } else if (this.addValue.id == this.taskListTransfer.id) {
+      return this.taskListTransfer;
+    }
   }
 
   createLiBox(id, choiceInput, description, value, date) {
@@ -174,12 +169,13 @@ else if(this.addValue.id == this.taskListTransfer.id) {
   }
 
   updateBudget() {
-
-this.totalBudget = 0
-    this.balanceItems.forEach(({choiceInput,value}) => {
-      choiceInput=="income" ? (this.totalBudget += parseFloat(value)): (this.totalBudget -= parseFloat(value))
-    })
-    this.money.innerHTML = this.totalBudget
+    this.totalBudget = 0;
+    this.balanceItems.forEach(({ choiceInput, value }) => {
+      choiceInput == 'income'
+        ? (this.totalBudget += parseFloat(value))
+        : (this.totalBudget -= parseFloat(value));
+    });
+    this.money.innerHTML = this.totalBudget;
   }
 
   getInputsValues() {
@@ -203,18 +199,19 @@ this.totalBudget = 0
   }
 
   deleteItem(target) {
-if(target.dataset.delete === document.querySelector(this.UISelectors.deleteTask).dataset.delete)
-target.parentElement.parentElement.remove()
-this.removeLocalStorage(target.parentElement.parentElement.id);
-this.updateBudget()
-
+    if (
+      target.dataset.delete === document.querySelector(this.UISelectors.deleteTask).dataset.delete
+    )
+      target.parentElement.parentElement.remove();
+    this.removeLocalStorage(target.parentElement.parentElement.id);
+    this.updateBudget();
   }
 
- removeLocalStorage(id) {
-    let items = [...this.balanceItems]
+  removeLocalStorage(id) {
+    let items = [...this.balanceItems];
     this.balanceItems = items.filter((item) => item.id != id);
-    this.setLocalStorage()
-  };
+    this.setLocalStorage();
+  }
 
   setLocalStorage() {
     localStorage.setItem('balanceItems', JSON.stringify(this.balanceItems));
